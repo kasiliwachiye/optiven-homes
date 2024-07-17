@@ -1,10 +1,12 @@
 import Curve from "@/components/transition/Curve";
+import React from "react";
 
-export default function Home() {
+function index() {
   return (
     <Curve>
-      <h1>Home Page</h1>
+      <h1>About Page</h1>
     </Curve>
   );
 }
 
+export default index;
