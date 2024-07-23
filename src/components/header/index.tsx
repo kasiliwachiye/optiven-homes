@@ -12,7 +12,7 @@ export default function Index() {
   return (
     <div className={styles.header}>
       <div className={styles.bar}>
-        <Link href="/">Olivier</Link>
+        <Link href="/">Optiven Homes</Link>
         <div
           onClick={() => {
             setIsActive(!isActive);

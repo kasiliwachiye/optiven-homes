@@ -17,7 +17,7 @@ export default function Index({ src, selectedLink }: IndexProps) {
       animate={selectedLink.isActive ? "open" : "closed"}
       className={styles.imageContainer}
     >
-      <Image src={`/images/${src}`} fill={true} alt="image" />
+      <Image src={`/assets/${src}`} fill={true} alt="image" />
     </motion.div>
   );
 }

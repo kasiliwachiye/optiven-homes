@@ -11,27 +11,37 @@ const links = [
   {
     title: "Home",
     href: "/",
-    src: "home.png",
+    src: "a.jpg",
   },
   {
-    title: "Shop",
+    title: "Team",
     href: "/shop",
-    src: "shop.png",
+    src: "b.jpg",
   },
   {
-    title: "About Us",
+    title: "About",
     href: "/about",
-    src: "home.png",
+    src: "c.jpg",
   },
   {
-    title: "Lookbook",
-    href: "/lookbook",
-    src: "lookbook.png",
+    title: "Blog",
+    href: "/blog",
+    src: "d.jpg",
   },
   {
     title: "Contact",
     href: "/contact",
-    src: "contact.png",
+    src: "e.jpg",
+  },
+  {
+    title: "House-Plans",
+    href: "/plans",
+    src: "f.jpg",
+  },
+  {
+    title: "Objectives",
+    href: "/objectives",
+    src: "g.jpg",
   },
 ];
 
