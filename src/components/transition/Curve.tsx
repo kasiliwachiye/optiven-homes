@@ -8,6 +8,10 @@ const routes: { [key: string]: string } = {
   "/": "Home",
   "/about": "About",
   "/contact": "Contact",
+  "/team": "Team",
+  "/blog": "Blog",
+  "/objectives": "Objectives",
+  "/plans": "House Plans",
 };
 
 const anim = (variants: any) => {

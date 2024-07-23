@@ -4,7 +4,7 @@ import React from "react";
 function index() {
   return (
     <Curve>
-      <h1>About</h1>
+      <h1>Objectives</h1>
     </Curve>
   );
 }
