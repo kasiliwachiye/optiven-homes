@@ -17,8 +17,22 @@ body {
   z-index: 1000;
 }
 
-.content {
-  padding-top: 60px; /* Adjust this value to the height of your header */
+.text-luxury {
+  color: #8b4513; /* SaddleBrown, indicating stability, homeliness, and luxury */
+}
+
+.text-secondary {
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .text-gradient {
+    font-size: 8vw;
+  }
+
+  .text-secondary {
+    font-size: 4vw;
+  }
 }
 
 .curve {
