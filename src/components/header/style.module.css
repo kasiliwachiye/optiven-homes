@@ -4,6 +4,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
+  z-index: 2;
 }
 
 .bar {

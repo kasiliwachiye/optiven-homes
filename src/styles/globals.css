@@ -9,6 +9,18 @@ body {
   font-family: "Manrope", sans-serif;
 }
 
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.content {
+  padding-top: 60px; /* Adjust this value to the height of your header */
+}
+
 .curve {
   svg,
   .background {
@@ -18,10 +30,12 @@ body {
     pointer-events: none;
     left: 0;
     top: 0;
+    z-index: 3;
   }
   .background {
     background-color: black;
     transition: opacity 0s linear 0.1s;
+    z-index: 3;
   }
   .route {
     position: absolute;
@@ -29,7 +43,7 @@ body {
     top: 40%;
     color: white;
     font-size: 46px;
-    z-index: 3;
+    z-index: 4;
     transform: translateX(-50%);
     text-align: center;
   }
