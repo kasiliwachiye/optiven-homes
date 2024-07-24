@@ -1,3 +1,9 @@
+.filterBarWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
 .filterBar {
   display: flex;
   align-items: flex-start;
@@ -8,6 +14,8 @@
   border-radius: 8px;
   margin: 20px 0;
   flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
 }
 
 .filterItem {
@@ -21,10 +29,10 @@
 .label {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   cursor: pointer;
-  font-weight: bold;
   text-transform: uppercase;
+  font-size: 11px;
 }
 
 .selection {
@@ -49,8 +57,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  background-color: #f9f9f9;
-  padding: 10px;
+  background-color: white;
+  padding: 10px 10px 30px 10px;
   position: absolute;
   top: 100%;
   left: 0;
@@ -72,7 +80,6 @@
 
 .priceRange {
   display: flex;
-  flex-direction: column;
   gap: 10px;
 }
 
