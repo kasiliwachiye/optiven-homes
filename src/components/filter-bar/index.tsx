@@ -19,13 +19,13 @@ export default function Index() {
   const [maxPrice, setMaxPrice] = useState<string>("");
 
   const toggleSelection = (
-    list: string[] | number[],
+    list: any,
     setList: Function,
     value: string | number
   ) => {
     setList(
       list.includes(value)
-        ? list.filter((item) => item !== value)
+        ? list.filter((item: number) => item !== value)
         : [...list, value]
     );
   };
