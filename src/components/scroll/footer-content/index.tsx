@@ -18,10 +18,13 @@ const Section1 = () => {
 };
 
 const Section2 = () => {
+  const getCurrentYear = () => {
+    return new Date().getFullYear();
+  };
   return (
     <div className="flex justify-between items-end text-white">
       <h1 className="text-[10vw] leading-[0.8] mt-10">Optiven Homes</h1>
-      <p>©copyright</p>
+      <p>© Copyright {getCurrentYear()} | All Rights Reserved</p>
     </div>
   );
 };
