@@ -14,14 +14,24 @@ const links = [
     src: "a.jpg",
   },
   {
+    title: "About",
+    href: "/about",
+    src: "c.jpg",
+  },
+  {
     title: "Team",
     href: "/team",
     src: "b.jpg",
   },
   {
-    title: "About",
-    href: "/about",
-    src: "c.jpg",
+    title: "Objectives",
+    href: "/objectives",
+    src: "g.jpg",
+  },
+  {
+    title: "House-Plans",
+    href: "/plans",
+    src: "f.jpg",
   },
   {
     title: "Blog",
@@ -32,16 +42,6 @@ const links = [
     title: "Contact",
     href: "/contact",
     src: "e.jpg",
-  },
-  {
-    title: "House-Plans",
-    href: "/plans",
-    src: "f.jpg",
-  },
-  {
-    title: "Objectives",
-    href: "/objectives",
-    src: "g.jpg",
   },
 ];
 

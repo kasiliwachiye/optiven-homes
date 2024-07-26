@@ -9,7 +9,7 @@ import Footer from "@/components/scroll/Footer";
 
 const plans = [
   {
-    id: 1, 
+    id: 1,
     image: "a.jpg",
     title: "Cozy Grand Residence",
     intro:
@@ -19,7 +19,7 @@ const plans = [
     link: "/plans/elegant-maisonette",
   },
   {
-    id: 2, 
+    id: 2,
     image: "b.jpg",
     title: "Modern Rustic Estate",
     intro:
@@ -29,7 +29,7 @@ const plans = [
     link: "/plans/elegant-maisonette",
   },
   {
-    id: 3, 
+    id: 3,
     image: "c.jpg",
     title: "Urban City Apartment",
     intro:
@@ -39,7 +39,7 @@ const plans = [
     link: "/plans/elegant-maisonette",
   },
   {
-    id: 4, 
+    id: 4,
     image: "d.jpg",
     title: "Suburban Family Home",
     intro:
@@ -49,7 +49,7 @@ const plans = [
     link: "/plans/elegant-maisonette",
   },
   {
-    id: 5, 
+    id: 5,
     image: "e.jpg",
     title: "Luxury Penthouse",
     intro:
@@ -59,7 +59,7 @@ const plans = [
     link: "/plans/elegant-maisonette",
   },
   {
-    id: 6, 
+    id: 6,
     image: "f.jpg",
     title: "Coastal Beach House",
     intro:
@@ -88,7 +88,7 @@ export default function Home() {
       <Description />
       <Section />
       <div className="container mx-auto my-20 px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">
+        <h2 className="text-[5vw] leading-[0.8] font-bold text-center mb-12">
           Featured Plans
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
