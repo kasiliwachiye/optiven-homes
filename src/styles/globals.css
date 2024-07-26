@@ -25,16 +25,6 @@ body {
   color: #666;
 }
 
-@media (max-width: 768px) {
-  .text-gradient {
-    font-size: 8vw;
-  }
-
-  .text-secondary {
-    font-size: 4vw;
-  }
-}
-
 .curve {
   svg,
   .background {
@@ -60,5 +50,169 @@ body {
     z-index: 4;
     transform: translateX(-50%);
     text-align: center;
+  }
+}
+
+/* PropertyCard.css */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.property-card {
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.5s ease-in-out;
+}
+
+.property-card:hover {
+  transform: scale(1.05);
+}
+
+.property-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.property-card .content {
+  padding: 1.5rem;
+}
+
+.property-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.property-card p {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+}
+
+.property-card .details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.property-card .details span {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.property-card .details span .count {
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.property-card button {
+  background-color: #38a169;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.property-card button:hover {
+  background-color: #2f855a;
+}
+
+/* Additional styles for ArticleCard component */
+
+.article-card {
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.5s ease-in-out;
+}
+
+.article-card:hover {
+  transform: scale(1.05);
+}
+
+.article-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.article-card .content {
+  padding: 1.5rem;
+}
+
+.article-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.article-card p {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+}
+
+.article-card .details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.article-card .details span {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.article-card .details span .count {
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.article-card a {
+  color: #38a169;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.article-card a:hover {
+  text-decoration: underline;
+}
+
+/* Grid adjustments */
+@media (min-width: 640px) {
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .text-gradient {
+    font-size: 8vw;
+  }
+
+  .text-secondary {
+    font-size: 4vw;
   }
 }

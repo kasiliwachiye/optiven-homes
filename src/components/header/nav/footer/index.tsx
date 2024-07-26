@@ -13,7 +13,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>Made by:</span> Studio Lumio
+          50:40:10 Construction Plan
         </motion.li>
       </ul>
       <ul>
@@ -24,18 +24,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>Typography:</span> Google Fonts
-        </motion.li>
-      </ul>
-      <ul>
-        <motion.li
-          custom={[0.3, 0]}
-          variants={translate}
-          initial="initial"
-          animate="enter"
-          exit="exit"
-        >
-          <span>Images:</span> Freepik, Envato
+          Cookie Policy
         </motion.li>
       </ul>
       <ul>
@@ -48,6 +37,8 @@ export default function Footer() {
         >
           Privacy Policy
         </motion.li>
+      </ul>
+      <ul>
         <motion.li
           custom={[0.3, 0]}
           variants={translate}
