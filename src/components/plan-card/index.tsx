@@ -1,21 +1,24 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
-interface PropertyCardProps {
+interface PlanCardProps {
   image: string;
   title: string;
   intro: string;
   bedrooms: number;
   bathrooms: number;
+  link: string;
 }
 
-const PropertyCard: React.FC<PropertyCardProps> = ({
+const PlanCard: React.FC<PlanCardProps> = ({
   image,
   title,
   intro,
   bedrooms,
   bathrooms,
+  link,
 }) => {
   return (
     <motion.div
@@ -47,10 +50,15 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
             <span>Bathrooms</span>
           </span>
         </div>
-        <button className="bg-black text-white w-full py-2 px-4">Details</button>
+        <Link
+          href={link}
+          className="block bg-black text-white w-full py-2 px-4 text-center"
+        >
+          Details
+        </Link>
       </div>
     </motion.div>
   );
 };
 
-export default PropertyCard;
+export default PlanCard;
