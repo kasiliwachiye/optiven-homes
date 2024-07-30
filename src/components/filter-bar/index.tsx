@@ -177,7 +177,7 @@ export default function FilterBar({ initialFilters = {} }: FilterBarProps) {
             <div className={styles.dropdownContent}>
               <div className={styles.priceRange}>
                 <label className={styles.label}>
-                  Min Price (KES)
+                  From (KES)
                   <input
                     type="number"
                     placeholder="0"
@@ -187,7 +187,7 @@ export default function FilterBar({ initialFilters = {} }: FilterBarProps) {
                   />
                 </label>
                 <label className={styles.label}>
-                  Max Price (KES)
+                  To (KES)
                   <input
                     type="number"
                     placeholder="100000000"

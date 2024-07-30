@@ -52,7 +52,7 @@ export default function AboutSection() {
         className="absolute w-full h-full"
       >
         <Image
-          src={"/assets/a.jpg"}
+          src={"/assets/f.jpg"}
           layout="fill"
           alt="background image"
           className="object-cover"
