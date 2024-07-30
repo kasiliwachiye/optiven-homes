@@ -1,12 +1,29 @@
+import React, { useEffect } from "react";
+import Lenis from "lenis";
+import AboutSection from "@/components/scroll/about/AboutSection";
+import AboutDescription from "@/components/scroll/about/AboutDescription";
+import Footer from "@/components/scroll/Footer";
 import Curve from "@/components/transition/Curve";
-import React from "react";
 
-function index() {
+export default function About() {
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    function raf(time: any) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy(); // Cleanup on unmount
+  }, []);
+
   return (
     <Curve>
-      <h1>About</h1>
+      <AboutSection />
+      <AboutDescription />
+      <Footer />
     </Curve>
   );
 }
-
-export default index;

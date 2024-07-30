@@ -1,10 +1,10 @@
 import Curve from '@/components/transition/Curve'
-import React from 'react'
+import Footer from "@/components/scroll/Footer";
 
 function index() {
   return (
     <Curve>
-      <h1>Contact</h1>
+      <Footer />
     </Curve>
   )
 }

@@ -16,8 +16,8 @@ export default function Description() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          Optiven Homes –
-          <span className="text-luxury"> Your Home. Our Commitment.</span>
+          Optiven Homes –{" "}
+          <span className="text-luxury">Your Home. Our Commitment.</span>
         </motion.p>
         <motion.p
           className="text-[2vw] leading-tight text-secondary"

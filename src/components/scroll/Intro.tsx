@@ -6,7 +6,6 @@ import FilterBar from "@/components/filter-bar";
 
 export default function Intro() {
   const container = useRef(null);
-
   const { scrollYProgress } = useScroll({
     offset: ["start start", "end start"],
   });

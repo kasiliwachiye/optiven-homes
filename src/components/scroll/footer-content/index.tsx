@@ -74,7 +74,7 @@ const Nav = () => {
 const ContactForm = () => {
   return (
     <div className="text-white lg:w-1/2 mb-8 lg:mb-0 lg:pt-32">
-      <h3 className="text-[8vw] leading-[0.8] my-10">Contact Us</h3>
+      <h3 className="text-[8vw] leading-[0.8] my-10">Contact Us*</h3>
       <form className="flex flex-col gap-4 md:gap-6 lg:gap-8">
         <div className="relative">
           <input
