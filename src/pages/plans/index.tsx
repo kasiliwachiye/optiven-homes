@@ -1,55 +1,67 @@
-import { useState } from "react";
-import HousePlanCard from "@/components/house-plan-card";
+import { useState, useEffect } from "react";
+import PlanCard from "@/components/plan-card";
 import Curve from "@/components/transition/Curve";
 import Footer from "@/components/scroll/Footer";
 
 const housePlans = [
   {
+    id: 1,
     image: "a.jpg",
     title: "Elegant Maisonette",
+    intro: "A modern and elegant maisonette with spacious rooms and a beautiful garden.",
     bedrooms: 4,
     bathrooms: 3,
-    price: 25000000, // in KES
+    price: 25000000,
     link: "/plans/elegant-maisonette",
   },
   {
+    id: 2,
     image: "b.jpg",
     title: "Modern Bungalow",
+    intro: "A stylish bungalow with modern amenities and a cozy atmosphere.",
     bedrooms: 3,
     bathrooms: 2,
-    price: 18000000, // in KES
+    price: 18000000,
     link: "/plans/modern-bungalow",
   },
   {
+    id: 3,
     image: "c.jpg",
     title: "Luxury Apartment",
+    intro: "A luxurious apartment with stunning views and premium facilities.",
     bedrooms: 2,
     bathrooms: 2,
-    price: 20000000, // in KES
+    price: 20000000,
     link: "/plans/luxury-apartment",
   },
   {
+    id: 4,
     image: "d.jpg",
     title: "Cozy Cottage",
+    intro: "A charming cottage with a rustic feel and modern conveniences.",
     bedrooms: 2,
     bathrooms: 1,
-    price: 15000000, // in KES
+    price: 15000000,
     link: "/plans/cozy-cottage",
   },
   {
+    id: 5,
     image: "e.jpg",
     title: "Spacious Villa",
+    intro: "A grand villa with ample space, luxurious interiors, and a large garden.",
     bedrooms: 5,
     bathrooms: 4,
-    price: 35000000, // in KES
+    price: 35000000,
     link: "/plans/spacious-villa",
   },
   {
+    id: 6,
     image: "f.jpg",
     title: "Modern Duplex",
+    intro: "A contemporary duplex with modern design and high-end finishes.",
     bedrooms: 4,
     bathrooms: 3,
-    price: 28000000, // in KES
+    price: 28000000,
     link: "/plans/modern-duplex",
   },
 ];
@@ -72,10 +84,11 @@ export default function HousePlans() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
-  const handleFilterChange = () => {
+  useEffect(() => {
     const filtered = housePlans.filter((plan) => {
       const matchesPropertyType =
-        propertyType === "Any" || plan.title.includes(propertyType);
+        propertyType === "Any" ||
+        plan.title.toLowerCase().includes(propertyType.toLowerCase());
       const matchesBedrooms =
         bedrooms === "Any" || plan.bedrooms === parseInt(bedrooms);
       const matchesMinPrice =
@@ -92,7 +105,7 @@ export default function HousePlans() {
     });
 
     setFilteredPlans(filtered);
-  };
+  }, [propertyType, bedrooms, minPrice, maxPrice]);
 
   return (
     <Curve>
@@ -102,10 +115,7 @@ export default function HousePlans() {
             <label className="font-bold mb-2">Property Type</label>
             <select
               value={propertyType}
-              onChange={(e) => {
-                setPropertyType(e.target.value);
-                handleFilterChange();
-              }}
+              onChange={(e) => setPropertyType(e.target.value)}
               className="p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               {propertyTypes.map((type, index) => (
@@ -119,10 +129,7 @@ export default function HousePlans() {
             <label className="font-bold mb-2">Bedrooms</label>
             <select
               value={bedrooms}
-              onChange={(e) => {
-                setBedrooms(e.target.value);
-                handleFilterChange();
-              }}
+              onChange={(e) => setBedrooms(e.target.value)}
               className="p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               {bedroomOptions.map((bedroom, index) => (
@@ -140,10 +147,7 @@ export default function HousePlans() {
                 placeholder="From"
                 value={minPrice}
                 min={0}
-                onChange={(e) => {
-                  setMinPrice(e.target.value);
-                  handleFilterChange();
-                }}
+                onChange={(e) => setMinPrice(e.target.value)}
                 className="p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
               />
               <input
@@ -151,18 +155,15 @@ export default function HousePlans() {
                 placeholder="To"
                 value={maxPrice}
                 min={0}
-                onChange={(e) => {
-                  setMaxPrice(e.target.value);
-                  handleFilterChange();
-                }}
+                onChange={(e) => setMaxPrice(e.target.value)}
                 className="p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
               />
             </div>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPlans.map((plan, index) => (
-            <HousePlanCard key={index} {...plan} />
+          {filteredPlans.map((plan) => (
+            <PlanCard key={plan.id} {...plan} />
           ))}
         </div>
       </div>
