@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacity, background } from "./anim";
 import Nav from "./nav";
+import Image from "next/image";
 
 export default function Index() {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -27,7 +28,15 @@ export default function Index() {
   return (
     <div className={styles.header}>
       <div className={styles.bar}>
-        <Link href="/">Optiven Homes</Link>
+        <Link href="/" className="ml-2 -my-2">
+          <span className="sr-only">Optiven Limited</span>
+          <Image
+            src="/assets/optiven-homes-logo.png"
+            alt="Optiven Homes Logo"
+            height={100}
+            width={160}
+          />
+        </Link>
         <div
           onClick={() => {
             setIsActive(!isActive);

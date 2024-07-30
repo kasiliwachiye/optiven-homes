@@ -58,7 +58,7 @@
   flex-wrap: wrap;
   gap: 10px;
   background-color: white;
-  padding: 10px 10px 30px 10px;
+  padding: 10px 10px 10px 10px;
   position: absolute;
   top: 100%;
   left: 0;
@@ -95,7 +95,7 @@
 }
 
 .searchButton {
-  background-color: #6c757d;
+  background-color: #000000;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -105,7 +105,7 @@
 }
 
 .searchButton:hover {
-  background-color: #5a6268;
+  background-color: #1f1f1f;
 }
 
 @media (max-width: 768px) {
