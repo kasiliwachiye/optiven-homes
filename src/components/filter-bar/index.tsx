@@ -1,29 +1,86 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import styles from "./index.module.css";
 
-const propertyTypes = ["Apartment", "Maisonette", "Bungalow"];
+const propertyTypes = [
+  "Apartment",
+  "Maisonette",
+  "Bungalow",
+  "Cottage",
+  "Villa",
+  "Duplex",
+];
 const bedrooms = [1, 2, 3, 4, 5];
 
-export default function Index() {
-  const [showPropertyTypeDropdown, setShowPropertyTypeDropdown] = useState<boolean>(false);
-  const [showBedroomsDropdown, setShowBedroomsDropdown] = useState<boolean>(false);
-  const [showPriceDropdown, setShowPriceDropdown] = useState<boolean>(false);
-  const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>([]);
-  const [selectedBedrooms, setSelectedBedrooms] = useState<number[]>([]);
-  const [minPrice, setMinPrice] = useState<string>("");
-  const [maxPrice, setMaxPrice] = useState<string>("");
+interface FilterBarProps {
+  initialFilters: {
+    propertyTypes?: string[];
+    bedrooms?: number[];
+    minPrice?: string;
+    maxPrice?: string;
+  };
+}
 
-  const toggleSelection = (list: any, setList: Function, value: string | number) => {
+export default function FilterBar({ initialFilters = {} }: FilterBarProps) {
+  const router = useRouter();
+  const [showPropertyTypeDropdown, setShowPropertyTypeDropdown] =
+    useState<boolean>(false);
+  const [showBedroomsDropdown, setShowBedroomsDropdown] =
+    useState<boolean>(false);
+  const [showPriceDropdown, setShowPriceDropdown] = useState<boolean>(false);
+  const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>(
+    initialFilters.propertyTypes || []
+  );
+  const [selectedBedrooms, setSelectedBedrooms] = useState<number[]>(
+    initialFilters.bedrooms || []
+  );
+  const [minPrice, setMinPrice] = useState<string>(
+    initialFilters.minPrice || ""
+  );
+  const [maxPrice, setMaxPrice] = useState<string>(
+    initialFilters.maxPrice || ""
+  );
+
+  const toggleSelection = (
+    list: any[],
+    setList: Function,
+    value: string | number
+  ) => {
     setList(
       list.includes(value)
-        ? list.filter((item: number) => item !== value)
+        ? list.filter((item) => item !== value)
         : [...list, value]
     );
   };
 
-  const formatSelections = (selections: (string | number)[], defaultText: string) => {
+  const formatSelections = (
+    selections: (string | number)[],
+    defaultText: string
+  ) => {
     return selections.length > 0 ? selections.join(", ") : defaultText;
+  };
+
+  const handleSearch = () => {
+    const query: { [key: string]: string | number | undefined } = {};
+
+    if (selectedPropertyTypes.length > 0) {
+      query.propertyTypes = selectedPropertyTypes.join(",");
+    }
+    if (selectedBedrooms.length > 0) {
+      query.bedrooms = selectedBedrooms.join(",");
+    }
+    if (minPrice) {
+      query.minPrice = minPrice;
+    }
+    if (maxPrice) {
+      query.maxPrice = maxPrice;
+    }
+
+    router.push({
+      pathname: "/plans",
+      query,
+    });
   };
 
   return (
@@ -32,7 +89,9 @@ export default function Index() {
         <div className={styles.filterItem}>
           <div
             className={styles.label}
-            onClick={() => setShowPropertyTypeDropdown(!showPropertyTypeDropdown)}
+            onClick={() =>
+              setShowPropertyTypeDropdown(!showPropertyTypeDropdown)
+            }
           >
             <span>Property Type</span>
             <span className={styles.chevron}>
@@ -142,7 +201,9 @@ export default function Index() {
           )}
         </div>
         <div className={styles.separator}></div>
-        <button className={styles.searchButton}>Search</button>
+        <button className={styles.searchButton} onClick={handleSearch}>
+          Search
+        </button>
       </div>
     </div>
   );

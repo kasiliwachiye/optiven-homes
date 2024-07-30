@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import PlanCard from "@/components/plan-card";
+import FilterBar from "@/components/filter-bar";
 import Curve from "@/components/transition/Curve";
 import Footer from "@/components/scroll/Footer";
 
@@ -8,10 +10,12 @@ const housePlans = [
     id: 1,
     image: "a.jpg",
     title: "Elegant Maisonette",
-    intro: "A modern and elegant maisonette with spacious rooms and a beautiful garden.",
+    intro:
+      "A modern and elegant maisonette with spacious rooms and a beautiful garden.",
     bedrooms: 4,
     bathrooms: 3,
     price: 25000000,
+    propertyType: "Maisonette",
     link: "/plans/elegant-maisonette",
   },
   {
@@ -22,6 +26,7 @@ const housePlans = [
     bedrooms: 3,
     bathrooms: 2,
     price: 18000000,
+    propertyType: "Bungalow",
     link: "/plans/modern-bungalow",
   },
   {
@@ -32,6 +37,7 @@ const housePlans = [
     bedrooms: 2,
     bathrooms: 2,
     price: 20000000,
+    propertyType: "Apartment",
     link: "/plans/luxury-apartment",
   },
   {
@@ -42,16 +48,19 @@ const housePlans = [
     bedrooms: 2,
     bathrooms: 1,
     price: 15000000,
+    propertyType: "Cottage",
     link: "/plans/cozy-cottage",
   },
   {
     id: 5,
     image: "e.jpg",
     title: "Spacious Villa",
-    intro: "A grand villa with ample space, luxurious interiors, and a large garden.",
+    intro:
+      "A grand villa with ample space, luxurious interiors, and a large garden.",
     bedrooms: 5,
     bathrooms: 4,
     price: 35000000,
+    propertyType: "Villa",
     link: "/plans/spacious-villa",
   },
   {
@@ -62,39 +71,55 @@ const housePlans = [
     bedrooms: 4,
     bathrooms: 3,
     price: 28000000,
+    propertyType: "Duplex",
     link: "/plans/modern-duplex",
   },
 ];
 
-const propertyTypes = [
-  "Any",
-  "Maisonette",
-  "Bungalow",
-  "Apartment",
-  "Cottage",
-  "Villa",
-  "Duplex",
-];
-const bedroomOptions = ["Any", 1, 2, 3, 4, 5];
+interface InitialFilters {
+  propertyTypes?: string[];
+  bedrooms?: number[];
+  minPrice?: string;
+  maxPrice?: string;
+}
 
 export default function HousePlans() {
+  const router = useRouter();
+  const { propertyTypes, bedrooms, minPrice, maxPrice } = router.query;
+
+  const initialFilters: InitialFilters = {
+    propertyTypes: propertyTypes
+      ? Array.isArray(propertyTypes)
+        ? propertyTypes
+        : propertyTypes.split(",")
+      : [],
+    bedrooms: bedrooms
+      ? Array.isArray(bedrooms)
+        ? bedrooms.map((b) => parseInt(b, 10))
+        : bedrooms.split(",").map((b) => parseInt(b, 10))
+      : [],
+    minPrice: minPrice as string,
+    maxPrice: maxPrice as string,
+  };
+
   const [filteredPlans, setFilteredPlans] = useState(housePlans);
-  const [propertyType, setPropertyType] = useState("Any");
-  const [bedrooms, setBedrooms] = useState("Any");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
 
   useEffect(() => {
     const filtered = housePlans.filter((plan) => {
       const matchesPropertyType =
-        propertyType === "Any" ||
-        plan.title.toLowerCase().includes(propertyType.toLowerCase());
+        (initialFilters.propertyTypes?.length || 0) === 0 ||
+        initialFilters.propertyTypes?.some((type) =>
+          plan.propertyType.toLowerCase().includes(type.toLowerCase())
+        );
       const matchesBedrooms =
-        bedrooms === "Any" || plan.bedrooms === parseInt(bedrooms);
+        (initialFilters.bedrooms?.length || 0) === 0 ||
+        initialFilters.bedrooms?.includes(plan.bedrooms);
       const matchesMinPrice =
-        minPrice === "" || plan.price >= parseInt(minPrice);
+        !initialFilters.minPrice ||
+        plan.price >= parseInt(initialFilters.minPrice);
       const matchesMaxPrice =
-        maxPrice === "" || plan.price <= parseInt(maxPrice);
+        !initialFilters.maxPrice ||
+        plan.price <= parseInt(initialFilters.maxPrice);
 
       return (
         matchesPropertyType &&
@@ -105,63 +130,13 @@ export default function HousePlans() {
     });
 
     setFilteredPlans(filtered);
-  }, [propertyType, bedrooms, minPrice, maxPrice]);
+  }, [propertyTypes, bedrooms, minPrice, maxPrice]);
 
   return (
     <Curve>
       <div className="container mx-auto py-20 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <div className="flex flex-col">
-            <label className="font-bold mb-2">Property Type</label>
-            <select
-              value={propertyType}
-              onChange={(e) => setPropertyType(e.target.value)}
-              className="p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              {propertyTypes.map((type, index) => (
-                <option key={index} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col">
-            <label className="font-bold mb-2">Bedrooms</label>
-            <select
-              value={bedrooms}
-              onChange={(e) => setBedrooms(e.target.value)}
-              className="p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              {bedroomOptions.map((bedroom, index) => (
-                <option key={index} value={bedroom}>
-                  {bedroom}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col">
-            <label className="font-bold mb-2">Price Range (KES)</label>
-            <div className="flex space-x-2">
-              <input
-                type="number"
-                placeholder="From"
-                value={minPrice}
-                min={0}
-                onChange={(e) => setMinPrice(e.target.value)}
-                className="p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
-              />
-              <input
-                type="number"
-                placeholder="To"
-                value={maxPrice}
-                min={0}
-                onChange={(e) => setMaxPrice(e.target.value)}
-                className="p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <FilterBar initialFilters={initialFilters} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
           {filteredPlans.map((plan) => (
             <PlanCard key={plan.id} {...plan} />
           ))}
