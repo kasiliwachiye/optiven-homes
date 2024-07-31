@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
 
@@ -81,6 +81,20 @@ export default function FilterBar({ initialFilters = {} }: FilterBarProps) {
       pathname: "/plans",
       query,
     });
+  };
+
+  const formatWithCommas = (value: string) => {
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedValue = e.target.value.replace(/,/g, "");
+    setMinPrice(formattedValue);
+  };
+
+  const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedValue = e.target.value.replace(/,/g, "");
+    setMaxPrice(formattedValue);
   };
 
   return (
@@ -171,7 +185,8 @@ export default function FilterBar({ initialFilters = {} }: FilterBarProps) {
             </span>
           </div>
           <div className={styles.selection}>
-            {minPrice || "Any"} - {maxPrice || "Any"}
+            {formatWithCommas(minPrice) || "Any"} -{" "}
+            {formatWithCommas(maxPrice) || "Any"}
           </div>
           {showPriceDropdown && (
             <div className={styles.dropdownContent}>
@@ -179,21 +194,19 @@ export default function FilterBar({ initialFilters = {} }: FilterBarProps) {
                 <label className={styles.label}>
                   From (KES)
                   <input
-                    type="number"
+                    type="text"
                     placeholder="0"
-                    value={minPrice}
-                    min={0}
-                    onChange={(e) => setMinPrice(e.target.value)}
+                    value={formatWithCommas(minPrice)}
+                    onChange={handleMinPriceChange}
                   />
                 </label>
                 <label className={styles.label}>
                   To (KES)
                   <input
-                    type="number"
-                    placeholder="100000000"
-                    value={maxPrice}
-                    min={0}
-                    onChange={(e) => setMaxPrice(e.target.value)}
+                    type="text"
+                    placeholder="10,000,000"
+                    value={formatWithCommas(maxPrice)}
+                    onChange={handleMaxPriceChange}
                   />
                 </label>
               </div>
