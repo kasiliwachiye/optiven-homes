@@ -30,7 +30,7 @@ const links = [
   },
   {
     title: "Interior Design",
-    href: "/interior",
+    href: "/interiors",
     src: "e.jpg",
   },
   {

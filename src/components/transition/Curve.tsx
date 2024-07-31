@@ -8,10 +8,10 @@ const routes: { [key: string]: string } = {
   "/": "Home",
   "/about": "About",
   "/contact": "Contact",
-  "/team": "Team",
+  "/interiors": "Interior Design",
   "/blog": "Blog",
-  "/objectives": "Objectives",
   "/plans": "House Plans",
+  "/communities": "Communities",
 };
 
 const anim = (variants: any) => {
