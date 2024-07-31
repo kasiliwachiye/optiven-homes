@@ -5,7 +5,7 @@ import FilterBar from "@/components/filter-bar";
 import Curve from "@/components/transition/Curve";
 import Footer from "@/components/scroll/Footer";
 
-const housePlans = [
+const plans = [
   {
     id: 1,
     image: "a.jpg",
@@ -102,10 +102,10 @@ export default function HousePlans() {
     maxPrice: maxPrice as string,
   };
 
-  const [filteredPlans, setFilteredPlans] = useState(housePlans);
+  const [filteredPlans, setFilteredPlans] = useState(plans);
 
   useEffect(() => {
-    const filtered = housePlans.filter((plan) => {
+    const filtered = plans.filter((plan) => {
       const matchesPropertyType =
         (initialFilters.propertyTypes?.length || 0) === 0 ||
         initialFilters.propertyTypes?.some((type) =>
