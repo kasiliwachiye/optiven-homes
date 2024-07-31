@@ -19,29 +19,29 @@ const links = [
     src: "c.jpg",
   },
   {
-    title: "Team",
-    href: "/team",
-    src: "b.jpg",
+    title: "Contact",
+    href: "/contact",
+    src: "e.jpg",
   },
   {
-    title: "Objectives",
-    href: "/objectives",
-    src: "g.jpg",
-  },
-  {
-    title: "House-Plans",
+    title: "House Plans",
     href: "/plans",
+    src: "d.jpg",
+  },
+  {
+    title: "Interior Design",
+    href: "/interior",
+    src: "e.jpg",
+  },
+  {
+    title: "Communities",
+    href: "/communities",
     src: "f.jpg",
   },
   {
     title: "Blog",
     href: "/blog",
-    src: "d.jpg",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-    src: "e.jpg",
+    src: "g.jpg",
   },
 ];
 

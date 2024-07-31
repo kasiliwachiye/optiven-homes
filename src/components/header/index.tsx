@@ -1,4 +1,3 @@
-// @components/header/index.tsx
 "use client";
 import styles from "./style.module.css";
 import Link from "next/link";
@@ -12,8 +11,7 @@ import Image from "next/image";
 export default function Index() {
   const [isActive, setIsActive] = useState<boolean>(false);
   const router = useRouter();
-
-  // Close the navbar on route change
+  
   useEffect(() => {
     const handleRouteChange = () => {
       setIsActive(false);
