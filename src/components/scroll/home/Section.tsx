@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { useScroll, useTransform, motion } from "framer-motion";
-import Background from "../../../public/assets/b.jpg";
 
 export default function Section() {
   const container = useRef(null);
@@ -21,7 +20,7 @@ export default function Section() {
       <div className="fixed top-[-10vh] left-0 h-[120vh] w-full">
         <motion.div style={{ y }} className="relative w-full h-full">
           <Image
-            src={Background}
+            src={`/assets/b.jpg`}
             fill
             alt="image"
             style={{ objectFit: "cover" }}

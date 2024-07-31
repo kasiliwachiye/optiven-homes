@@ -2,7 +2,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { useScroll, useTransform, motion } from "framer-motion";
-import Background from "../../../public/assets/d.jpg";
 import FilterBar from "@/components/filter-bar";
 import { useRouter } from "next/router";
 
@@ -49,7 +48,7 @@ export default function Intro() {
     <div className="h-screen overflow-hidden relative" ref={container}>
       <motion.div style={{ y }} className="relative h-full">
         <Image
-          src={Background}
+          src={`/assets/d.jpg`}
           fill
           alt="image"
           style={{ objectFit: "cover" }}

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
-import Intro from "@/components/scroll/Intro";
-import Description from "@/components/scroll/Description";
-import Section from "@/components/scroll/Section";
+import Intro from "@/components/scroll/home/Intro";
+import Description from "@/components/scroll/home/Description";
+import Section from "@/components/scroll/home/Section";
 import Curve from "@/components/transition/Curve";
 import PlanCard from "@/components/plan-card";
 import Footer from "@/components/scroll/Footer";
