@@ -8,7 +8,7 @@ interface DesignCardProps {
   title: string;
   intro: string;
   style: string;
-  price: number;
+  finishing: string[];
   link: string;
 }
 
@@ -17,7 +17,7 @@ const DesignCard: React.FC<DesignCardProps> = ({
   title,
   intro,
   style,
-  price,
+  finishing,
   link,
 }) => {
   return (
@@ -40,19 +40,28 @@ const DesignCard: React.FC<DesignCardProps> = ({
       <div className="p-6">
         <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="text-gray-700 mb-4">{intro}</p>
+        <div className="mb-4">
+          <h4 className="font-semibold mb-2">Finishing</h4>
+          <div className="flex flex-wrap gap-2">
+            {finishing.map((finish, index) => (
+              <span
+                key={index}
+                className="bg-gray-200 text-gray-800 text-sm font-semibold px-2 py-1 rounded"
+              >
+                {finish}
+              </span>
+            ))}
+          </div>
+        </div>
         <div className="flex justify-between items-center mb-4">
           <span className="flex items-center space-x-1 border p-2 rounded">
             <Image
               src="/assets/icons/button.png"
-              alt="Shower Icon"
+              alt="Style Icon"
               width={24}
               height={24}
             />
             <span className="font-bold">{style}</span>
-          </span>
-          <span className="flex items-center space-x-1 border p-2 rounded">
-            <span className="font-bold">{price.toLocaleString()}</span>
-            <span>KES</span>
           </span>
         </div>
         <Link

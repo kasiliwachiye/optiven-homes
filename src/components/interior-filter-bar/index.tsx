@@ -11,9 +11,12 @@ const designStyles = [
   "Bohemian",
 ];
 
+const finishings = ["High Gloss", "Minimalist", "Vintage", "Luxury", "Wooden", "Rustic"];
+
 interface FilterBarProps {
   initialFilters: {
     styles?: string[];
+    finishings?: string[];
     minPrice?: string;
     maxPrice?: string;
   };
@@ -24,9 +27,15 @@ export default function DesignFilterBar({
 }: FilterBarProps) {
   const router = useRouter();
   const [showStyleDropdown, setShowStyleDropdown] = useState<boolean>(false);
+  const [showFinishingDropdown, setShowFinishingDropdown] = useState<boolean>(
+    false
+  );
   const [showPriceDropdown, setShowPriceDropdown] = useState<boolean>(false);
   const [selectedStyles, setSelectedStyles] = useState<string[]>(
     initialFilters.styles || []
+  );
+  const [selectedFinishings, setSelectedFinishings] = useState<string[]>(
+    initialFilters.finishings || []
   );
   const [minPrice, setMinPrice] = useState<string>(
     initialFilters.minPrice || ""
@@ -59,6 +68,9 @@ export default function DesignFilterBar({
 
     if (selectedStyles.length > 0) {
       query.styles = selectedStyles.join(",");
+    }
+    if (selectedFinishings.length > 0) {
+      query.finishings = selectedFinishings.join(",");
     }
     if (minPrice) {
       query.minPrice = minPrice;
@@ -116,6 +128,42 @@ export default function DesignFilterBar({
                     }
                   />
                   {style}
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className={styles.separator}></div>
+        <div className={styles.filterItem}>
+          <div
+            className={styles.label}
+            onClick={() => setShowFinishingDropdown(!showFinishingDropdown)}
+          >
+            <span>Finishing</span>
+            <span className={styles.chevron}>
+              {showFinishingDropdown ? "▲" : "▼"}
+            </span>
+          </div>
+          <div className={styles.selection}>
+            {formatSelections(selectedFinishings, "Any")}
+          </div>
+          {showFinishingDropdown && (
+            <div className={styles.dropdownContent}>
+              {finishings.map((finishing) => (
+                <label key={finishing} className={styles.dropdownItem}>
+                  <input
+                    type="checkbox"
+                    value={finishing}
+                    checked={selectedFinishings.includes(finishing)}
+                    onChange={() =>
+                      toggleSelection(
+                        selectedFinishings,
+                        setSelectedFinishings,
+                        finishing
+                      )
+                    }
+                  />
+                  {finishing}
                 </label>
               ))}
             </div>

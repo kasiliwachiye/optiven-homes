@@ -13,6 +13,7 @@ const designs = [
     intro:
       "A sleek and modern living room with minimalist decor and smart home features.",
     style: "Modern",
+    finishing: ["High Gloss", "Minimalist"],
     price: 5000000,
     link: "/interior-designs/modern-living-room",
   },
@@ -23,6 +24,7 @@ const designs = [
     intro:
       "A classic bedroom design with elegant furnishings and timeless charm.",
     style: "Classic",
+    finishing: ["Vintage", "Luxury"],
     price: 4000000,
     link: "/interior-designs/classic-bedroom",
   },
@@ -33,6 +35,7 @@ const designs = [
     intro:
       "A Scandinavian-inspired kitchen with clean lines and natural materials.",
     style: "Scandinavian",
+    finishing: ["Wooden", "Rustic"],
     price: 6000000,
     link: "/interior-designs/scandinavian-kitchen",
   },
@@ -41,16 +44,22 @@ const designs = [
 
 interface InitialFilters {
   styles?: string[];
+  finishings?: string[];
   minPrice?: string;
   maxPrice?: string;
 }
 
 export default function InteriorDesigns() {
   const router = useRouter();
-  const { styles, minPrice, maxPrice } = router.query;
+  const { styles, finishings, minPrice, maxPrice } = router.query;
 
   const initialFilters: InitialFilters = {
     styles: styles ? (Array.isArray(styles) ? styles : styles.split(",")) : [],
+    finishings: finishings
+      ? Array.isArray(finishings)
+        ? finishings
+        : finishings.split(",")
+      : [],
     minPrice: minPrice as string,
     maxPrice: maxPrice as string,
   };
@@ -64,6 +73,11 @@ export default function InteriorDesigns() {
         initialFilters.styles?.some((style) =>
           design.style.toLowerCase().includes(style.toLowerCase())
         );
+      const matchesFinishing =
+        (initialFilters.finishings?.length || 0) === 0 ||
+        initialFilters.finishings?.some((finishing) =>
+          design.finishing.includes(finishing)
+        );
       const matchesMinPrice =
         !initialFilters.minPrice ||
         design.price >= parseInt(initialFilters.minPrice);
@@ -71,11 +85,13 @@ export default function InteriorDesigns() {
         !initialFilters.maxPrice ||
         design.price <= parseInt(initialFilters.maxPrice);
 
-      return matchesStyle && matchesMinPrice && matchesMaxPrice;
+      return (
+        matchesStyle && matchesFinishing && matchesMinPrice && matchesMaxPrice
+      );
     });
 
     setFilteredDesigns(filtered);
-  }, [styles, minPrice, maxPrice]);
+  }, [styles, finishings, minPrice, maxPrice]);
 
   return (
     <Curve>
