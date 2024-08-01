@@ -1,0 +1,143 @@
+.filterBarWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.filterBar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.selection {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.chevron {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.separator {
+  width: 1px;
+  height: 40px;
+  background-color: #ddd;
+  align-self: center;
+}
+
+.dropdownContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 8px;
+  width: max-content;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  width: 45%;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdownItem input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.priceRange {
+  display: flex;
+  gap: 10px;
+}
+
+.priceRange label {
+  display: flex;
+  flex-direction: column;
+}
+
+.priceRange input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchButton {
+  background-color: #000000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.searchButton:hover {
+  background-color: #1f1f1f;
+}
+
+@media (max-width: 768px) {
+  .filterBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filterItem {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .priceRange {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dropdownContent {
+    width: 100%;
+  }
+
+  .separator {
+    display: none;
+  }
+}

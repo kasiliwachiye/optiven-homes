@@ -124,6 +124,12 @@
     width: 100%;
   }
 
+  .priceRange {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .separator {
     display: none;
   }
