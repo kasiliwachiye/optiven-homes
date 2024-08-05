@@ -41,19 +41,6 @@ export default function DetailsSection({ design }: DetailsSectionProps) {
         {design.title}
       </h1>
       <p className="text-lg mb-4">{design.intro}</p>
-      <div className="flex flex-wrap gap-2">
-        <span className="bg-gray-200 text-gray-800 text-lg font-semibold px-2 py-1 rounded">
-          {design.style}
-        </span>
-        {design.finishing.map((finish, index) => (
-          <span
-            className="bg-gray-200 text-gray-800 text-lg font-semibold px-2 py-1 rounded"
-            key={index}
-          >
-            {finish}
-          </span>
-        ))}
-      </div>
       <hr className="my-4" />
       <h2 className="text-2xl font-semibold my-4">Features</h2>
       <div className="flex flex-wrap gap-2">
