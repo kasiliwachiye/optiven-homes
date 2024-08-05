@@ -1,4 +1,4 @@
-import Curve from '@/components/transition/Curve'
+import Curve from "@/components/transition/Curve";
 import Footer from "@/components/scroll/Footer";
 
 function index() {
@@ -6,7 +6,7 @@ function index() {
     <Curve>
       <Footer />
     </Curve>
-  )
+  );
 }
 
-export default index
+export default index;

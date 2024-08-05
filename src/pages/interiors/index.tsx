@@ -12,10 +12,10 @@ const designs = [
     title: "Rustic",
     intro:
       "Rough-hewn wood siding, exposed beams, textural fabrics, and minimal decoration.",
-    style: "Modern",
+    style: "Rustic",
     finishing: ["High Gloss", "Woody"],
     price: 5000000,
-    link: "/interior-designs/modern-living-room",
+    link: "/interiors/rustic",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const designs = [
     style: "Minimalist",
     finishing: ["Minimalist", "Luxury"],
     price: 4000000,
-    link: "/interior-designs/minimalist",
+    link: "/interiors/minimalist",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const designs = [
     style: "Scandinavian",
     finishing: ["Bespoke", "Minimalist"],
     price: 6000000,
-    link: "/interior-designs/scandinavian-kitchen",
+    link: "/interiors/scandinavian",
   },
   // Add more designs as needed
 ];
