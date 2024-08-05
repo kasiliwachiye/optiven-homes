@@ -15,7 +15,7 @@ const communities = [
     amenities: ["Park", "School", "Playground"],
     location: "Karen",
     price: 10000000,
-    link: "/community/family-friendly-suburb",
+    link: "/communities/family-friendly-suburb",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const communities = [
     amenities: ["Gym", "Pool", "Shopping Mall"],
     location: "Westlands",
     price: 20000000,
-    link: "/community/luxury-downtown-living",
+    link: "/communities/luxury-downtown-living",
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const communities = [
     amenities: ["Renewable Energy", "Recycling Facilities"],
     location: "Nanyuki",
     price: 15000000,
-    link: "/community/eco-friendly-community",
+    link: "/communities/eco-friendly-community",
   },
   // Add more communities as needed
 ];

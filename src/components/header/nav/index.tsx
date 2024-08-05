@@ -26,17 +26,17 @@ const links = [
   {
     title: "House Plans",
     href: "/plans",
-    src: "d.jpg",
+    src: "a.jpg",
   },
   {
     title: "Interior Design",
     href: "/interiors",
-    src: "e.jpg",
+    src: "interiors/e.jpg",
   },
   {
     title: "Communities",
     href: "/communities",
-    src: "f.jpg",
+    src: "communities/c.jpg",
   },
   {
     title: "Blog",
