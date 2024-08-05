@@ -7,7 +7,7 @@ interface DetailsSectionProps {
     title: string;
     bedrooms: number;
     bathrooms: number;
-    area: number;
+    intro: string;
     plinthArea: number;
     features: string[];
     bannerImage: string;
@@ -23,7 +23,7 @@ export default function DetailsSection({ plan }: DetailsSectionProps) {
 
   const y = useTransform(scrollYProgress, [0, 1], ["-5vh", "5vh"]);
   return (
-    <div className="container mx-auto px-4 py-16 lg:py-32">
+    <div className="container mx-auto px-4 py-16 lg:pt-32">
       <div className="relative h-[70vh]">
         <motion.div
           style={{ y }}
@@ -37,31 +37,29 @@ export default function DetailsSection({ plan }: DetailsSectionProps) {
           />
         </motion.div>
       </div>
-      <h1 className="text-[5vw] leading-[0.8] font-bold mb-12">{plan.title}</h1>
-      <div className="flex flex-wrap gap-8 mb-8">
-        <div className="flex items-center space-x-2">
-          <span className="text-xl font-semibold">Bedrooms:</span>
-          <span>{plan.bedrooms}</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-xl font-semibold">Bathrooms:</span>
-          <span>{plan.bathrooms}</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-xl font-semibold">Area:</span>
-          <span>{plan.area} sqft</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-xl font-semibold">Plinth Area:</span>
-          <span>{plan.plinthArea} sqft</span>
-        </div>
+      <h1 className="text-3xl lg:text-[5vw] leading-[0.8] font-bold mb-8">
+        {plan.title}
+      </h1>
+      <div className="flex items-center text-lg space-x-2">
+        <p>{plan.intro}</p>
       </div>
-      <h2 className="text-2xl font-semibold mb-4">Features</h2>
-      <ul className="list-disc list-inside text-lg">
+      <hr className="my-4" />
+      <h2 className="text-2xl font-semibold my-4">Features</h2>
+      <div className="flex flex-wrap gap-2">
         {plan.features.map((feature, index) => (
-          <li key={index}>{feature}</li>
+          <span
+            className="bg-gray-200 text-gray-800 text-lg font-semibold px-2 py-1 rounded"
+            key={index}
+          >
+            {feature}
+          </span>
         ))}
-      </ul>
+      </div>
+      <hr className="my-4" />
+      <h2 className="text-2xl font-semibold my-4">Plinth Area</h2>
+      <h1 className="text-5xl lg:text-[5vw] leading-[0.8] font-bold mb-8">
+        {plan.plinthArea} SQM
+      </h1>
     </div>
   );
 }

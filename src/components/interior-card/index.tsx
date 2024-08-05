@@ -30,7 +30,7 @@ const DesignCard: React.FC<DesignCardProps> = ({
       <div className="relative h-64 w-full overflow-hidden">
         <motion.div className="relative w-full h-full transform transition-transform duration-500 hover:scale-110">
           <Image
-            src={`/assets/${image}`}
+            src={`/assets/interiors/${image}`}
             alt={title}
             layout="fill"
             objectFit="cover"

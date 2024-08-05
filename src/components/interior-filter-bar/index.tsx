@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import styles from "./index.module.css";
 
 const designStyles = [
-  "Modern",
+  "Minimalist",
   "Classic",
   "Scandinavian",
   "Industrial",
-  "Bohemian",
+  "Rustic",
 ];
 
 const finishings = ["High Gloss", "Minimalist", "Vintage", "Luxury", "Wooden", "Rustic"];

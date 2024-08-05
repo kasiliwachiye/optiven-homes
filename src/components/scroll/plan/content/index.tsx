@@ -19,7 +19,11 @@ export default function ContentSection({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: content,
+          }}
+        />
       </motion.div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {images.map((image, index) => (
