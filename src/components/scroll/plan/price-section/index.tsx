@@ -39,7 +39,7 @@ const PriceSection = ({ plinthArea }: PlinthAreaProps) => {
           <span className="text-xl font-semibold mr-4">Standard</span>
           <label
             htmlFor="priceToggle"
-            className="relative inline-block h-8 w-12 cursor-pointer [-webkit-tap-highlight-color:_transparent]"
+            className="relative inline-block h-8 w-16 cursor-pointer"
           >
             <input
               type="checkbox"
@@ -47,13 +47,9 @@ const PriceSection = ({ plinthArea }: PlinthAreaProps) => {
               className="peer sr-only"
               onChange={() => setIsHighEnd(!isHighEnd)}
             />
-            <span className="absolute inset-0 m-auto h-2 rounded-full bg-gray-300"></span>
+            <span className="absolute inset-0 m-auto h-full w-full rounded-full border-2 border-gray-400 bg-gray-300 transition-all peer-checked:bg-green-500"></span>
 
-            <span className="absolute inset-y-0 start-0 m-auto size-6 rounded-full bg-green-500 transition-all peer-checked:start-6 peer-checked:[&_>_*]:scale-0">
-              <span className="absolute inset-0 m-auto size-4 rounded-full bg-gray-200 transition">
-                {" "}
-              </span>
-            </span>
+            <span className="absolute inset-y-0 left-0 m-auto h-6 w-6 rounded-full bg-white border border-gray-400 transition-all transform peer-checked:translate-x-8"></span>
           </label>
           <span className="text-xl font-semibold ml-4">High-End</span>
         </div>
