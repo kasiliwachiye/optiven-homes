@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 interface PlanCardProps {
-  image: string;
+  displayImage: string;
   title: string;
   intro: string;
   bedrooms: number;
@@ -13,7 +13,7 @@ interface PlanCardProps {
 }
 
 const PlanCard: React.FC<PlanCardProps> = ({
-  image,
+  displayImage,
   title,
   intro,
   bedrooms,
@@ -30,7 +30,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
       <div className="relative h-64 w-full overflow-hidden">
         <motion.div className="relative w-full h-full transform transition-transform duration-500 hover:scale-110">
           <Image
-            src={`/assets/${image}`}
+            src={displayImage}
             alt={title}
             layout="fill"
             objectFit="cover"
