@@ -11,6 +11,7 @@ const routes: { [key: string]: string } = {
   "/interiors": "Interior Design",
   "/blog": "Blog",
   "/plans": "House Plans",
+  "/plans/[slug]": "Plan Details",
   "/communities": "Communities",
 };
 
@@ -83,7 +84,10 @@ const SVG = ({ height, width }: { height: number; width: number }) => {
 
   return (
     <motion.svg {...anim(translate)}>
-      <motion.path {...anim(curve(initialPath, targetPath))} />
+      <motion.path
+        {...anim(curve(initialPath, targetPath))}
+        fill="currentColor"
+      />
     </motion.svg>
   );
 };
