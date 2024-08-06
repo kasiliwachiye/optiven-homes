@@ -1,17 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
-
-const propertyTypes = [
-  "Apartment",
-  "Maisonette",
-  "Bungalow",
-  "Cottage",
-  "Villa",
-  "Duplex",
-];
-const bedrooms = [1, 2, 3, 4, 5];
+import { fetchContent } from "../../../lib/api";
 
 interface FilterBarProps {
   initialFilters: {
@@ -21,6 +12,8 @@ interface FilterBarProps {
     maxPrice?: string;
   };
 }
+
+const bedrooms = [1, 2, 3, 4, 5];
 
 export default function FilterBar({ initialFilters = {} }: FilterBarProps) {
   const router = useRouter();
@@ -41,6 +34,21 @@ export default function FilterBar({ initialFilters = {} }: FilterBarProps) {
   const [maxPrice, setMaxPrice] = useState<string>(
     initialFilters.maxPrice || ""
   );
+  const [propertyTypes, setPropertyTypes] = useState<string[]>([]);
+
+  // Fetch property types
+  useEffect(() => {
+    const fetchPropertyTypes = async () => {
+      try {
+        const { data } = await fetchContent("property-types");
+        setPropertyTypes(data.map((type: any) => type.attributes.name));
+      } catch (error) {
+        console.error("Failed to fetch property types:", error);
+      }
+    };
+
+    fetchPropertyTypes();
+  }, []);
 
   const toggleSelection = (
     list: any[],

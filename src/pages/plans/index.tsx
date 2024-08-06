@@ -14,7 +14,7 @@ interface Plan {
     intro: string;
     bedrooms: number;
     bathrooms: number;
-    price: number;
+    plinthArea: number;
     propertyType: string;
     link: string;
   };
@@ -45,9 +45,30 @@ export default function HousePlans({ plans, error }: HousePlansProps) {
   };
 
   const [filteredPlans, setFilteredPlans] = useState<Plan[]>(plans);
+  const [unitPrice, setUnitPrice] = useState<number>(0);
+
+  // Fetch unit price of standard finish
+  useEffect(() => {
+    const fetchFinishTypes = async () => {
+      try {
+        const { data } = await fetchContent("finish-types");
+        const standardFinish = data.find(
+          (finish: any) => finish.attributes.name === "Standard Finish"
+        );
+        if (standardFinish) {
+          setUnitPrice(parseInt(standardFinish.attributes.unitPrice, 10));
+        }
+      } catch (error) {
+        console.error("Failed to fetch finish types:", error);
+      }
+    };
+
+    fetchFinishTypes();
+  }, []);
 
   useEffect(() => {
     const filtered = plans.filter((plan) => {
+      const price = plan.attributes.plinthArea * unitPrice;
       const matchesPropertyType =
         (initialFilters.propertyTypes.length || 0) === 0 ||
         initialFilters.propertyTypes.some((type) =>
@@ -59,11 +80,9 @@ export default function HousePlans({ plans, error }: HousePlansProps) {
         (initialFilters.bedrooms.length || 0) === 0 ||
         initialFilters.bedrooms.includes(plan.attributes.bedrooms);
       const matchesMinPrice =
-        !initialFilters.minPrice ||
-        plan.attributes.price >= parseInt(initialFilters.minPrice);
+        !initialFilters.minPrice || price >= parseInt(initialFilters.minPrice);
       const matchesMaxPrice =
-        !initialFilters.maxPrice ||
-        plan.attributes.price <= parseInt(initialFilters.maxPrice);
+        !initialFilters.maxPrice || price <= parseInt(initialFilters.maxPrice);
 
       return (
         matchesPropertyType &&
@@ -74,7 +93,7 @@ export default function HousePlans({ plans, error }: HousePlansProps) {
     });
 
     setFilteredPlans(filtered);
-  }, [propertyTypes, bedrooms, minPrice, maxPrice, plans]);
+  }, [propertyTypes, bedrooms, minPrice, maxPrice, plans, unitPrice]);
 
   return (
     <Curve>
@@ -111,7 +130,10 @@ export async function getStaticProps() {
       "galleryImages",
       "finishTypes",
       "propertyType",
+      "propertyType",
     ]);
+
+    console.log(data);
 
     return {
       props: {
@@ -128,6 +150,8 @@ export async function getStaticProps() {
                 (img: any) => img.attributes.url
               ) || [],
             link: `/plans/${item.id}`,
+            propertyType:
+              item.attributes.propertyType?.data?.attributes?.name || "",
           },
         })),
       },
