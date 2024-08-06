@@ -7,7 +7,7 @@ import Footer from "@/components/scroll/Footer";
 import LinksSection from "@/components/scroll/communities/links-section";
 import Curve from "@/components/transition/Curve";
 import PriceSection from "@/components/scroll/communities/price-section";
-import Section from "@/components/scroll/home/Section";
+import Section from "@/components/scroll/Section";
 
 // Example data fetching function
 const getCommunityBySlug = (slug: string) => {

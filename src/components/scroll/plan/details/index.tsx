@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { useScroll, useTransform, motion } from "framer-motion";
 
-interface DetailsSectionProps {
+interface DetailsProps {
   plan: {
     title: string;
     bedrooms: number;
@@ -10,11 +10,11 @@ interface DetailsSectionProps {
     intro: string;
     plinthArea: number;
     features: string[];
-    bannerImage: string;
+    displayImage: string;
   };
 }
 
-export default function DetailsSection({ plan }: DetailsSectionProps) {
+export default function Details({ plan }: DetailsProps) {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -30,7 +30,7 @@ export default function DetailsSection({ plan }: DetailsSectionProps) {
           className="absolute top-0 left-0 w-full h-full"
         >
           <Image
-            src={`/assets/${plan.bannerImage}`}
+            src={plan.displayImage}
             fill
             alt="Banner Image"
             style={{ objectFit: "cover" }}

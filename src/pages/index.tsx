@@ -1,84 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Lenis from "lenis";
 import Intro from "@/components/scroll/home/Intro";
 import Description from "@/components/scroll/home/Description";
-import Section from "@/components/scroll/home/Section";
+import ParallaxImageSection from "@/components/scroll/ParallaxImageSection";
 import Curve from "@/components/transition/Curve";
 import PlanCard from "@/components/plan-card";
 import Footer from "@/components/scroll/Footer";
+import { fetchContent } from "../../lib/api";
 
-const plans = [
-  {
-    id: 1,
-    image: "a.jpg",
-    title: "Elegant Maisonette",
-    intro:
-      "A modern and elegant maisonette with spacious rooms and a beautiful garden.",
-    bedrooms: 4,
-    bathrooms: 3,
-    price: 25000000,
-    propertyType: "Maisonette",
-    link: "/plans/elegant-maisonette",
-  },
-  {
-    id: 2,
-    image: "b.jpg",
-    title: "Modern Bungalow",
-    intro: "A stylish bungalow with modern amenities and a cozy atmosphere.",
-    bedrooms: 3,
-    bathrooms: 2,
-    price: 18000000,
-    propertyType: "Bungalow",
-    link: "/plans/modern-bungalow",
-  },
-  {
-    id: 3,
-    image: "c.jpg",
-    title: "Luxury Apartment",
-    intro: "A luxurious apartment with stunning views and premium facilities.",
-    bedrooms: 2,
-    bathrooms: 2,
-    price: 20000000,
-    propertyType: "Apartment",
-    link: "/plans/luxury-apartment",
-  },
-  {
-    id: 4,
-    image: "d.jpg",
-    title: "Cozy Cottage",
-    intro: "A charming cottage with a rustic feel and modern conveniences.",
-    bedrooms: 2,
-    bathrooms: 1,
-    price: 15000000,
-    propertyType: "Cottage",
-    link: "/plans/cozy-cottage",
-  },
-  {
-    id: 5,
-    image: "e.jpg",
-    title: "Spacious Villa",
-    intro:
-      "A grand villa with ample space, luxurious interiors, and a large garden.",
-    bedrooms: 5,
-    bathrooms: 4,
-    price: 35000000,
-    propertyType: "Villa",
-    link: "/plans/spacious-villa",
-  },
-  {
-    id: 6,
-    image: "f.jpg",
-    title: "Modern Duplex",
-    intro: "A contemporary duplex with modern design and high-end finishes.",
-    bedrooms: 4,
-    bathrooms: 3,
-    price: 28000000,
-    propertyType: "Duplex",
-    link: "/plans/modern-duplex",
-  },
-];
+interface Plan {
+  id: number;
+  attributes: {
+    displayImage: string;
+    title: string;
+    intro: string;
+    bedrooms: number;
+    bathrooms: number;
+    propertyType: string;
+  };
+}
 
 export default function Home() {
+  const [featuredPlans, setFeaturedPlans] = useState<Plan[]>([]);
+
   useEffect(() => {
     const lenis = new Lenis();
 
@@ -92,18 +36,54 @@ export default function Home() {
     return () => lenis.destroy();
   }, []);
 
+  useEffect(() => {
+    const fetchFeaturedPlans = async () => {
+      try {
+        const { data } = await fetchContent(
+          "plans",
+          { "filters[isFeatured][$eq]": "true" }, // Convert boolean to string
+          1,
+          6,
+          ["displayImage", "propertyType"]
+        );
+
+        const plans = data.map((item: any) => ({
+          id: item.id,
+          attributes: {
+            ...item.attributes,
+            displayImage:
+              item.attributes.displayImage?.data?.attributes?.url || "",
+          },
+        }));
+        setFeaturedPlans(plans);
+      } catch (error) {
+        console.error("Failed to fetch featured plans:", error);
+      }
+    };
+
+    fetchFeaturedPlans();
+  }, []);
+
   return (
     <Curve>
       <Intro />
       <Description />
-      <Section />
+      <ParallaxImageSection />
       <div className="container mx-auto my-20 px-4">
         <h2 className="text-[5vw] leading-[0.8] font-bold text-center mb-12">
           Featured Plans
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {plans.map((plan) => (
-            <PlanCard key={plan.id} {...plan} />
+          {featuredPlans.map((plan) => (
+            <PlanCard
+              key={plan.id}
+              displayImage={plan.attributes.displayImage}
+              title={plan.attributes.title}
+              intro={plan.attributes.intro}
+              bedrooms={plan.attributes.bedrooms}
+              bathrooms={plan.attributes.bathrooms}
+              link={`/plans/${plan.id}`}
+            />
           ))}
         </div>
       </div>

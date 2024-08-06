@@ -1,27 +1,48 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import {
+  BlocksRenderer,
+  type BlocksContent,
+} from "@strapi/blocks-react-renderer";
 
-interface ContentSectionProps {
-  content: string;
+interface ContentProps {
+  content: BlocksContent;
   images: string[];
 }
 
-export default function ContentSection({
-  content,
-  images,
-}: ContentSectionProps) {
+export default function Content({ content, images }: ContentProps) {
   return (
     <div className="container mx-auto px-4 py-16">
       <motion.div
-        className="prose prose-lg max-w-none mb-12"
+        className="prose prose-lg w-full max-w-none mb-12"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        <div
-          dangerouslySetInnerHTML={{
-            __html: content,
+        <BlocksRenderer
+          content={content}
+          blocks={{
+            paragraph: ({ children }) => (
+              <p className="text-gray-900 w-full">{children}</p>
+            ),
+            heading: ({ children, level }) => {
+              const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
+              return (
+                <HeadingTag className={`text-${level}xl font-bold w-full`}>
+                  {children}
+                </HeadingTag>
+              );
+            },
+            link: ({ children, url }) => (
+              <a href={url} className="text-blue-500 hover:underline">
+                {children}
+              </a>
+            ),
+          }}
+          modifiers={{
+            bold: ({ children }) => <strong>{children}</strong>,
+            italic: ({ children }) => <em className="italic">{children}</em>,
           }}
         />
       </motion.div>
@@ -35,7 +56,7 @@ export default function ContentSection({
             transition={{ duration: 0.8, delay: index * 0.2 }}
           >
             <Image
-              src={`/assets/${image}`}
+              src={image}
               width={800}
               height={600}
               alt={`Image ${index + 1}`}

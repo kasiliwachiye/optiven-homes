@@ -1,72 +1,102 @@
-import { useEffect } from "react";
+// pages/plans/[slug]/index.tsx
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Lenis from "lenis";
-import DetailsSection from "@/components/scroll/plan/details-section";
-import ContentSection from "@/components/scroll/plan/content";
+import Details from "@/components/scroll/plan/details";
+import Content from "@/components/scroll/plan/content";
 import Footer from "@/components/scroll/Footer";
-import Section from "@/components/scroll/home/Section";
-import LinksSection from "@/components/scroll/plan/links-section";
+import ParallaxImageSection from "@/components/scroll/ParallaxImageSection";
+import Links from "@/components/scroll/plan/links";
 import Curve from "@/components/transition/Curve";
-import PriceSection from "@/components/scroll/plan/price-section";
+import Price from "@/components/scroll/plan/price";
+import { type BlocksContent } from "@strapi/blocks-react-renderer";
+import { fetchContent } from "../../../../lib/api";
 
-const getPlanBySlug = (slug: string) => {
-  const plans = [
-    {
-      slug: "elegant-maisonette",
-      title: "Elegant Maisonette",
-      intro:
-        "A modern and elegant maisonette with spacious rooms and a beautiful garden.",
-      bedrooms: 4,
-      bathrooms: 3,
-      plinthArea: 200,
-      unitAreaPrice: 500000,
-      bannerImage: "a.jpg",
-      images: [
-        "a.jpg",
-        "b.jpg",
-        "c.jpg",
-        "d.jpg",
-        "e.jpg",
-        "f.jpg",
-        "g.jpg",
-        "h.jpg",
-      ],
-      content: `
-        <p>Welcome to the Elegant Maisonette, a perfect blend of modern design and luxury living. This stunning home offers a spacious and functional layout, ideal for families looking for comfort and style.</p>
-        <br/>
-        <strong>Features:</strong>
-        <li>4 Bedrooms: Each bedroom is thoughtfully designed with ample closet space and large windows for natural light.</li>
-        <li>3 Bathrooms: Enjoy modern bathrooms with high-end fixtures and finishes.</li>
-        <li>2 Living Rooms: A formal living room for entertaining guests and a cozy family room for relaxation.</li>
-        <li>1 Kitchen: A state-of-the-art kitchen equipped with modern appliances, custom cabinetry, and a spacious pantry.</li>
-        <li>1 Dining Area: An elegant dining area that accommodates a large dining table for family gatherings.</li>
-        <li>1 Garage: A spacious garage with enough room for two vehicles and additional storage.</li>
-        <li>Swimming Pool: A private swimming pool for leisure and exercise.</li>
-        <li>Garden: A beautifully landscaped garden with space for outdoor activities and a tranquil retreat.</li>
-        <br/>
-        <p>The Elegant Maisonette is designed to cater to your every need, providing a sanctuary that is both functional and aesthetically pleasing. With its luxurious interiors and premium amenities, this home is a true masterpiece. Experience the perfect blend of comfort and sophistication in this exquisite property.</p>
-      `,
-      features: [
-        "4 Bedrooms",
-        "3 Bathrooms",
-        "2 Living Rooms",
-        "1 Kitchen",
-        "1 Dining Area",
-        "1 Garage",
-        "Swimming Pool",
-        "Garden",
-      ],
-    },
-  ];
+interface Plan {
+  title: string;
+  displayImage: string;
+  intro: string;
+  bedrooms: number;
+  bathrooms: number;
+  plinthArea: number;
+  bannerImage: string;
+  images: string[];
+  content: BlocksContent;
+  features: string[];
+  waterFormLink: string;
+  designContractLink: string;
+  floorPlanPDF: string;
+}
 
-  return plans.find((plan) => plan.slug === slug);
-};
+interface FinishType {
+  name: string;
+  unitPrice: number;
+}
 
 export default function PlanDetails() {
   const router = useRouter();
   const { slug } = router.query;
+  const [plan, setPlan] = useState<Plan | null>(null);
+  const [finishTypes, setFinishTypes] = useState<FinishType[]>([]);
 
-  const plan = getPlanBySlug(slug as string);
+  useEffect(() => {
+    if (!slug) return;
+
+    const fetchPlanData = async () => {
+      try {
+        const [planResponse, finishTypesResponse] = await Promise.all([
+          fetchContent("plans", { slug }, 1, 1, [
+            "bannerImage",
+            "galleryImages",
+            "finishTypes",
+            "propertyType",
+            "displayImage",
+          ]),
+          fetchContent("finish-types"),
+        ]);
+
+        const planData = planResponse.data[0]?.attributes;
+        const finishTypesData = finishTypesResponse.data;
+
+        if (planData) {
+          setPlan({
+            title: planData.title,
+            intro: planData.intro,
+            displayImage: planData.displayImage?.data?.attributes?.url || "",
+            bedrooms: planData.bedrooms,
+            bathrooms: planData.bathrooms,
+            plinthArea: parseInt(planData.plinthArea),
+            bannerImage: planData.bannerImage?.data?.attributes?.url || "",
+            images:
+              planData.galleryImages?.data?.map(
+                (img: any) => img.attributes.url
+              ) || [],
+            content: planData.content,
+            features: [
+              `${planData.bedrooms} Bedrooms`,
+              `${planData.bathrooms} Bathrooms`,
+            ],
+            waterFormLink: planData.waterFormLink,
+            designContractLink: planData.designContractLink,
+            floorPlanPDF: planData.floorPlanPDF,
+          });
+        }
+
+        if (finishTypesData) {
+          setFinishTypes(
+            finishTypesData.map((type: any) => ({
+              name: type.attributes.name,
+              unitPrice: parseInt(type.attributes.unitPrice, 10),
+            }))
+          );
+        }
+      } catch (error) {
+        console.error("Failed to fetch plan or finish type data:", error);
+      }
+    };
+
+    fetchPlanData();
+  }, [slug]);
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -84,15 +114,17 @@ export default function PlanDetails() {
   if (!plan) return <div>Loading...</div>;
 
   return (
-    <div>
-      <Curve>
-        <DetailsSection plan={plan} />
-        <Section />
-        <ContentSection content={plan.content} images={plan.images} />
-        <PriceSection plinthArea={plan.plinthArea} />
-        <LinksSection />
-        <Footer />
-      </Curve>
-    </div>
+    <Curve>
+      <Details plan={plan} />
+      <ParallaxImageSection src={plan.bannerImage} />
+      <Content content={plan.content} images={plan.images} />
+      <Price plinthArea={plan.plinthArea} finishTypes={finishTypes} />
+      <Links
+        waterFormLink={plan.waterFormLink}
+        designContractLink={plan.designContractLink}
+        floorPlanPDF={plan.floorPlanPDF}
+      />
+      <Footer />
+    </Curve>
   );
 }

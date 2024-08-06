@@ -6,7 +6,7 @@ import ContentSection from "@/components/scroll/interior/content";
 import Footer from "@/components/scroll/Footer";
 import LinksSection from "@/components/scroll/interior/links-section";
 import Curve from "@/components/transition/Curve";
-import Section from "@/components/scroll/home/Section";
+import Section from "@/components/scroll/Section";
 import PriceSection from "@/components/scroll/interior/price-section";
 
 // Example data fetching function

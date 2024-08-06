@@ -1,13 +1,29 @@
 import React from "react";
 import Link from "next/link";
 
-export default function LinksSection() {
+interface LinksProps {
+  waterFormLink?: string;
+  designContractLink?: string;
+  floorPlanPDF?: string;
+}
+
+export default function Links({
+  waterFormLink,
+  designContractLink,
+  floorPlanPDF,
+}: LinksProps) {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
-        <AnimatedLink href="/floor-plans" label="Floor Plans" />
-        <AnimatedLink href="/water-form" label="Water Form" />
-        <AnimatedLink href="/design-contract" label="Design Contract" />
+        {floorPlanPDF && (
+          <AnimatedLink href={floorPlanPDF} label="Floor Plans" />
+        )}
+        {waterFormLink && (
+          <AnimatedLink href={waterFormLink} label="Water Form" />
+        )}
+        {designContractLink && (
+          <AnimatedLink href={designContractLink} label="Design Contract" />
+        )}
       </div>
     </div>
   );

@@ -2,7 +2,13 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { useScroll, useTransform, motion } from "framer-motion";
 
-export default function Section() {
+interface ParallaxImageSectionProps {
+  src?: string;
+}
+
+export default function ParallaxImageSection({
+  src = "/assets/a.jpg",
+}: ParallaxImageSectionProps) {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -20,9 +26,9 @@ export default function Section() {
       <div className="fixed top-[-10vh] left-0 h-[120vh] w-full">
         <motion.div style={{ y }} className="relative w-full h-full">
           <Image
-            src={`/assets/b.jpg`}
+            src={src}
             fill
-            alt="image"
+            alt="Parallax Background"
             style={{ objectFit: "cover" }}
           />
         </motion.div>
