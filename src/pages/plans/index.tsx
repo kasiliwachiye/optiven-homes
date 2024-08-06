@@ -133,8 +133,6 @@ export async function getStaticProps() {
       "propertyType",
     ]);
 
-    console.log(data);
-
     return {
       props: {
         plans: data.map((item: any) => ({

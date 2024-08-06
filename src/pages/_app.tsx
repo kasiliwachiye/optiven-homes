@@ -11,12 +11,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
         <title>Optiven Homes - Your Home. Our Commitment.</title>
         <meta
           name="description"
-          content="Optiven Limited offers value-added plots and land in various parts of Kenya. Discover sustainable development and innovative solutions with us."
+          content="Optiven Homes is aimed at providing our customers 100% professional touch. Considering your needs, wants, and plans, we create a truly unique home that is designed to suit your lifestyle, land, and budget. Optiven Homes is focusing on developing residential homes within Nairobi Metropolis and surrounding counties. Turn Your Optiven Plot Ownership Into Home Reality with our 50:40:10 Construction Plan. We Build Maisonettes, Bungalows, and Apartments."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="keywords"
-          content="Optiven, Real Estate Kenya, Value-added plots, Land for sale Kenya, Land for sale Nanyuki, Land for sale Kajiado, Land for sale Kitengela, Land for sale Malindi, Land for sale Nakuru, Land for sale Konza, Land for sale Thika, Sustainable Development, Innovative Solutions"
+          content="Optiven Homes is aimed at providing our customers 100% professional touch. Considering your needs, wants, and plans, we create a truly unique home that is designed to suit your lifestyle, land, and budget. Optiven Homes is focusing on developing residential homes within Nairobi Metropolis and surrounding counties. Turn Your Optiven Plot Ownership Into Home Reality with our 50:40:10 Construction Plan. We Build Maisonettes, Bungalows, and Apartments."
         />
         <meta name="robots" content="index, follow" />
         <meta
@@ -25,7 +25,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
         />
         <meta
           property="og:description"
-          content="Optiven Homes offers value-added plots and land in various parts of Kenya. Discover sustainable development and innovative solutions with us."
+          content="Optiven Homes is aimed at providing our customers 100% professional touch. Considering your needs, wants, and plans, we create a truly unique home that is designed to suit your lifestyle, land, and budget. Optiven Homes is focusing on developing residential homes within Nairobi Metropolis and surrounding counties. Turn Your Optiven Plot Ownership Into Home Reality with our 50:40:10 Construction Plan. We Build Maisonettes, Bungalows, and Apartments."
         />
         <meta property="og:url" content="https://www.optivenhomes.co.ke" />
         <meta property="og:type" content="website" />
@@ -37,16 +37,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
         />
         <meta
           name="twitter:description"
-          content="Optiven Homes offers value-added plots and land in various parts of Kenya. Discover sustainable development and innovative solutions with us."
+          content="Optiven Homes is aimed at providing our customers 100% professional touch. Considering your needs, wants, and plans, we create a truly unique home that is designed to suit your lifestyle, land, and budget. Optiven Homes is focusing on developing residential homes within Nairobi Metropolis and surrounding counties. Turn Your Optiven Plot Ownership Into Home Reality with our 50:40:10 Construction Plan. We Build Maisonettes, Bungalows, and Apartments."
         />
         <meta name="twitter:image" content="/images/twitter-image.jpg" />
         <link rel="canonical" href="https://www.optivenhomes.co.ke" />
         <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
+
         <link rel="manifest" href="/site.webmanifest" />
         <script type="application/ld+json">
           {`
@@ -55,8 +51,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
             "@type": "RealEstateAgent",
             "name": "Optiven Homes",
             "url": "https://www.optivenhomes.co.ke",
-            "logo": "https://www.optivenhomes.co.ke/optiven-logo.png",
-            "description": "Optiven Homes offers value-added plots and land in various parts of Kenya. Discover sustainable development and innovative solutions with us.",
+            "logo": "https://www.optivenhomes.co.ke/optiven-homes-logo.png",
+            "description": "Optiven Homes is aimed at providing our customers 100% professional touch. Considering your needs, wants, and plans, we create a truly unique home that is designed to suit your lifestyle, land, and budget. Optiven Homes is focusing on developing residential homes within Nairobi Metropolis and surrounding counties. Turn Your Optiven Plot Ownership Into Home Reality with our 50:40:10 Construction Plan. We Build Maisonettes, Bungalows, and Apartments.",
             "sameAs": [
               "https://www.facebook.com/Optivenlimited",
               "https://x.com/OptivenLimited",
@@ -71,7 +67,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
             },
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+254790300300",
+              "telephone": "+254743404040",
               "contactType": "Customer Service"
             }
           }

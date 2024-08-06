@@ -37,7 +37,7 @@ export default function Details({ plan }: DetailsProps) {
           />
         </motion.div>
       </div>
-      <h1 className="text-3xl lg:text-[5vw] leading-[0.8] font-bold mb-8">
+      <h1 className="text-3xl lg:text-[4vw] leading-[0.8] font-bold mb-8">
         {plan.title}
       </h1>
       <div className="flex items-center text-lg space-x-2">

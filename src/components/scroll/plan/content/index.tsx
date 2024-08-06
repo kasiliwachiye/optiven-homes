@@ -24,7 +24,7 @@ export default function Content({ content, images }: ContentProps) {
           content={content}
           blocks={{
             paragraph: ({ children }) => (
-              <p className="text-gray-900 w-full">{children}</p>
+              <p className="text-gray-900 text-xl w-full">{children}</p>
             ),
             heading: ({ children, level }) => {
               const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;

@@ -29,8 +29,8 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           <Image
             src={`/assets/${image}`}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
           />
         </motion.div>
       </div>

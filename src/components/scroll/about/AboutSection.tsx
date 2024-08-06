@@ -53,7 +53,7 @@ export default function AboutSection() {
       >
         <Image
           src={"/assets/f.jpg"}
-          layout="fill"
+          fill
           alt="background image"
           className="object-cover"
         />

@@ -32,8 +32,8 @@ const DesignCard: React.FC<DesignCardProps> = ({
           <Image
             src={`/assets/interiors/${image}`}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{objectFit:"cover"}}
           />
         </motion.div>
       </div>

@@ -32,8 +32,8 @@ const CommunityCard: React.FC<CommunityCardProps> = ({
           <Image
             src={`/assets/communities/${image}`}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{objectFit:"cover"}}
           />
         </motion.div>
       </div>

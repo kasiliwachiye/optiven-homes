@@ -32,8 +32,8 @@ const PlanCard: React.FC<PlanCardProps> = ({
           <Image
             src={displayImage}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
           />
         </motion.div>
       </div>
