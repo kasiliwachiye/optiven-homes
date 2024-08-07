@@ -16,7 +16,7 @@ export default function About() {
 
     requestAnimationFrame(raf);
 
-    return () => lenis.destroy(); // Cleanup on unmount
+    return () => lenis.destroy();
   }, []);
 
   return (
