@@ -6,7 +6,7 @@ import ContentSection from "@/components/scroll/interior/content";
 import Footer from "@/components/scroll/Footer";
 import LinksSection from "@/components/scroll/interior/links-section";
 import Curve from "@/components/transition/Curve";
-import Section from "@/components/scroll/Section";
+import ParallaxImageSection from "@/components/scroll/ParallaxImageSection";
 import PriceSection from "@/components/scroll/interior/price-section";
 
 // Example data fetching function
@@ -87,7 +87,7 @@ export default function InteriorDetails() {
     <div>
       <Curve>
         <DetailsSection design={design} />
-        <Section />
+        <ParallaxImageSection src="/assets/interiors/c.jpg" />
         <ContentSection content={design.content} images={design.images} />
         <PriceSection plinthArea={design.plinthArea} />
         <LinksSection />
