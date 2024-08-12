@@ -60,4 +60,19 @@ export const fetchContent = async (
   }
 };
 
+export const fetchPlanById = async (id: string) => {
+  try {
+    const params = new URLSearchParams({
+      populate:
+        "bannerImage,galleryImages,finishTypes,propertyType,displayImage",
+    });
+
+    const response = await strapi.get(`/plans/${id}`, { params });
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error fetching plan by ID:`, error);
+    throw error;
+  }
+};
+
 export default strapi;

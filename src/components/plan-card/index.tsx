@@ -9,7 +9,7 @@ interface PlanCardProps {
   intro: string;
   bedrooms: number;
   bathrooms: number;
-  link: string;
+  id: number;
 }
 
 const PlanCard: React.FC<PlanCardProps> = ({
@@ -18,7 +18,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
   intro,
   bedrooms,
   bathrooms,
-  link,
+  id,
 }) => {
   return (
     <motion.div
@@ -63,7 +63,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
           </span>
         </div>
         <Link
-          href={link}
+          href={`/plans/${id}`}
           className="block bg-black text-white w-full py-2 px-4 text-center"
         >
           Details

@@ -1,4 +1,3 @@
-// pages/plans/[slug]/index.tsx
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Lenis from "lenis";
@@ -10,7 +9,7 @@ import Links from "@/components/scroll/plan/links";
 import Curve from "@/components/transition/Curve";
 import Price from "@/components/scroll/plan/price";
 import { type BlocksContent } from "@strapi/blocks-react-renderer";
-import { fetchContent } from "../../../../lib/api";
+import { fetchPlanById } from "../../../../lib/api";
 
 interface Plan {
   title: string;
@@ -44,51 +43,40 @@ export default function PlanDetails() {
 
     const fetchPlanData = async () => {
       try {
-        const [planResponse, finishTypesResponse] = await Promise.all([
-          fetchContent("plans", { slug }, 1, 1, [
-            "bannerImage",
-            "galleryImages",
-            "finishTypes",
-            "propertyType",
-            "displayImage",
-          ]),
-          fetchContent("finish-types"),
-        ]);
-
-        const planData = planResponse.data[0]?.attributes;
-        const finishTypesData = finishTypesResponse.data;
+        const planData = await fetchPlanById(slug as string);
 
         if (planData) {
+          const attributes = planData.attributes;
           setPlan({
-            title: planData.title,
-            intro: planData.intro,
-            displayImage: planData.displayImage?.data?.attributes?.url || "",
-            bedrooms: planData.bedrooms,
-            bathrooms: planData.bathrooms,
-            plinthArea: parseInt(planData.plinthArea),
-            bannerImage: planData.bannerImage?.data?.attributes?.url || "",
+            title: attributes.title,
+            intro: attributes.intro,
+            displayImage: attributes.displayImage?.data?.attributes?.url || "",
+            bedrooms: attributes.bedrooms,
+            bathrooms: attributes.bathrooms,
+            plinthArea: parseInt(attributes.plinthArea),
+            bannerImage: attributes.bannerImage?.data?.attributes?.url || "",
             images:
-              planData.galleryImages?.data?.map(
+              attributes.galleryImages?.data?.map(
                 (img: any) => img.attributes.url
               ) || [],
-            content: planData.content,
+            content: attributes.content,
             features: [
-              `${planData.bedrooms} Bedrooms`,
-              `${planData.bathrooms} Bathrooms`,
+              `${attributes.bedrooms} Bedrooms`,
+              `${attributes.bathrooms} Bathrooms`,
             ],
-            waterFormLink: planData.waterFormLink,
-            designContractLink: planData.designContractLink,
-            floorPlanPDF: planData.floorPlanPDF,
+            waterFormLink: attributes.waterFormLink,
+            designContractLink: attributes.designContractLink,
+            floorPlanPDF: attributes.floorPlanPDF,
           });
-        }
 
-        if (finishTypesData) {
-          setFinishTypes(
-            finishTypesData.map((type: any) => ({
-              name: type.attributes.name,
-              unitPrice: parseInt(type.attributes.unitPrice, 10),
-            }))
-          );
+          if (attributes.finishTypes?.data) {
+            setFinishTypes(
+              attributes.finishTypes.data.map((type: any) => ({
+                name: type.attributes.name,
+                unitPrice: parseInt(type.attributes.unitPrice, 10),
+              }))
+            );
+          }
         }
       } catch (error) {
         console.error("Failed to fetch plan or finish type data:", error);

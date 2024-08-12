@@ -16,7 +16,6 @@ interface Plan {
     bathrooms: number;
     plinthArea: number;
     propertyType: string;
-    link: string;
   };
 }
 
@@ -47,7 +46,6 @@ export default function HousePlans({ plans, error }: HousePlansProps) {
   const [filteredPlans, setFilteredPlans] = useState<Plan[]>(plans);
   const [unitPrice, setUnitPrice] = useState<number>(0);
 
-  // Fetch unit price of standard finish
   useEffect(() => {
     const fetchFinishTypes = async () => {
       try {
@@ -111,7 +109,7 @@ export default function HousePlans({ plans, error }: HousePlansProps) {
                 intro={plan.attributes.intro}
                 bedrooms={plan.attributes.bedrooms}
                 bathrooms={plan.attributes.bathrooms}
-                link={plan.attributes.link}
+                id={plan.id}
               />
             ))}
           </div>
@@ -130,7 +128,6 @@ export async function getStaticProps() {
       "galleryImages",
       "finishTypes",
       "propertyType",
-      "propertyType",
     ]);
 
     return {
@@ -147,7 +144,6 @@ export async function getStaticProps() {
               item.attributes.galleryImages?.data?.map(
                 (img: any) => img.attributes.url
               ) || [],
-            link: `/plans/${item.id}`,
             propertyType:
               item.attributes.propertyType?.data?.attributes?.name || "",
           },
