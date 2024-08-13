@@ -188,7 +188,21 @@ body {
   text-decoration: underline;
 }
 
-/* Grid adjustments */
+.masonry-grid {
+  display: flex;
+  margin-left: -30px;
+  width: auto;
+}
+
+.masonry-grid_column {
+  padding-left: 30px;
+  background-clip: padding-box;
+}
+
+.masonry-grid_column > div {
+  margin-bottom: 30px;
+}
+
 @media (min-width: 640px) {
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
