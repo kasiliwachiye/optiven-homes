@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Masonry from "react-masonry-css";
 import Curve from "@/components/transition/Curve";
 import Footer from "@/components/scroll/Footer";
@@ -56,6 +56,8 @@ export default function InteriorDesigns() {
   const [selectedCategory, setSelectedCategory] =
     useState<string>("All categories");
 
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (selectedCategory === "All categories") {
       setFilteredDesigns(designs);
@@ -70,13 +72,63 @@ export default function InteriorDesigns() {
     default: 4,
     1100: 3,
     700: 2,
-    500: 1,
+    500: 2,
   };
+
+  // Handle grab and scroll
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    let isDown = false;
+    let startX: number;
+    let scrollLeft: number;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      isDown = true;
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      container.style.cursor = "grabbing";
+    };
+
+    const handleMouseLeave = () => {
+      isDown = false;
+      container.style.cursor = "grab";
+    };
+
+    const handleMouseUp = () => {
+      isDown = false;
+      container.style.cursor = "grab";
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll-fast
+      container.scrollLeft = scrollLeft - walk;
+    };
+
+    container.addEventListener("mousedown", handleMouseDown);
+    container.addEventListener("mouseleave", handleMouseLeave);
+    container.addEventListener("mouseup", handleMouseUp);
+    container.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      container.removeEventListener("mousedown", handleMouseDown);
+      container.removeEventListener("mouseleave", handleMouseLeave);
+      container.removeEventListener("mouseup", handleMouseUp);
+      container.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   return (
     <Curve>
       <div className="container mx-auto py-20 px-4">
-        <div className="scrollable-category-bar flex items-center justify-start py-4 md:py-8 space-x-3 overflow-x-auto">
+        <div
+          className="scrollable-category-bar flex items-center justify-start py-4 md:py-8 space-x-3 overflow-x-auto cursor-grab"
+          ref={scrollContainerRef}
+        >
           {categories.map((category) => (
             <button
               key={category}
