@@ -6,15 +6,16 @@ import Footer from "@/components/scroll/Footer";
 interface Design {
   id: number;
   image: string;
-  style: string;
+  tags: string[];
 }
 
-const shuffleArray = (array: any[]) => {
-  for (let i = array.length - 1; i > 0; i--) {
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
-  return array;
+  return newArray;
 };
 
 const images = Array.from({ length: 17 }, (_, i) =>
@@ -23,21 +24,23 @@ const images = Array.from({ length: 17 }, (_, i) =>
 
 const shuffledImages = shuffleArray(images);
 
-const styles = ["Rustic", "Minimalist", "Scandinavian", "Mid-Century Modern"];
-
-const designs: Design[] = shuffledImages.map((image, index) => ({
-  id: index + 1,
-  image,
-  style: styles[index % styles.length],
-}));
-
-const categories = [
-  "All categories",
+const tags = [
   "Rustic",
   "Minimalist",
   "Scandinavian",
   "Mid-Century Modern",
+  "Bathroom",
+  "Living Room",
+  "Kitchen",
 ];
+
+const designs: Design[] = shuffledImages.map((image, index) => ({
+  id: index + 1,
+  image,
+  tags: [tags[index % tags.length], tags[(index + 1) % tags.length]],
+}));
+
+const categories = ["All categories", ...Array.from(new Set(tags))];
 
 export default function InteriorDesigns() {
   const [filteredDesigns, setFilteredDesigns] = useState<Design[]>(designs);
@@ -49,7 +52,7 @@ export default function InteriorDesigns() {
       setFilteredDesigns(designs);
     } else {
       setFilteredDesigns(
-        designs.filter((design) => design.style === selectedCategory)
+        designs.filter((design) => design.tags.includes(selectedCategory))
       );
     }
   }, [selectedCategory]);
@@ -89,7 +92,7 @@ export default function InteriorDesigns() {
             <div key={design.id} className="mb-4">
               <img
                 src={`assets/${design.image}`}
-                alt={`image for ${design.style}`}
+                alt={`image for ${design.tags.join(", ")}`}
                 className="h-auto max-w-full rounded-lg"
               />
             </div>
