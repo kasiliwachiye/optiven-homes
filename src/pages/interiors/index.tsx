@@ -32,6 +32,15 @@ const tags = [
   "Bathroom",
   "Living Room",
   "Kitchen",
+  "Outdoor",
+  "Vintage",
+  "Contemporary",
+  "Industrial",
+  "Bohemian",
+  "Traditional",
+  "Modern",
+  "Eclectic",
+  "Art Deco",
 ];
 
 const designs: Design[] = shuffledImages.map((image, index) => ({
@@ -67,7 +76,7 @@ export default function InteriorDesigns() {
   return (
     <Curve>
       <div className="container mx-auto py-20 px-4">
-        <div className="flex items-center justify-center py-4 md:py-8 flex-wrap">
+        <div className="scrollable-category-bar flex items-center justify-start py-4 md:py-8 space-x-3 overflow-x-auto">
           {categories.map((category) => (
             <button
               key={category}
@@ -76,7 +85,7 @@ export default function InteriorDesigns() {
                 selectedCategory === category
                   ? "text-blue-700 border-blue-600"
                   : "text-gray-900 border-white"
-              } hover:text-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800`}
+              } hover:text-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-xl text-base font-medium px-5 min-w-fit py-2.5 text-center dark:text-white dark:focus:ring-gray-800`}
               onClick={() => setSelectedCategory(category)}
             >
               {category}
