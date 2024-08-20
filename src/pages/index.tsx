@@ -41,7 +41,7 @@ export default function Home() {
       try {
         const { data } = await fetchContent(
           "plans",
-          { "filters[isFeatured][$eq]": "true" }, // Convert boolean to string
+          { "filters[isFeatured][$eq]": "true" },
           1,
           6,
           ["displayImage", "propertyType"]
@@ -82,7 +82,7 @@ export default function Home() {
               intro={plan.attributes.intro}
               bedrooms={plan.attributes.bedrooms}
               bathrooms={plan.attributes.bathrooms}
-              link={`/plans/${plan.id}`}
+              id={plan.id}
             />
           ))}
         </div>
